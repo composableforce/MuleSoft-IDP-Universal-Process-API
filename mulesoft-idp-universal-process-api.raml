@@ -364,16 +364,6 @@ description: |
   |||| 
   ||||
 
-  **IDP Runtime Service API connector**
-
-  **Integrating IDP with Anypoint Studio**
-
-  Execute a published document action and retrieve the results from Anypoint Studio using that document action’s IDP Runtime Service API connector. This connector generates automatically when you publish a document action to Anypoint Exchange. Then, you can download it as a Mule connector from Exchange.
-
-  Each document action version generates a different connector. For example, when you publish a document action for the first time, it generates a connector in Exchange that executes version `1.0.0` of this document action. Then, if you modify the document action and republish it as version `1.1.0`, it generates a different connector that you must download and install in Studio to execute this new document action version. Consider this behavior when building your integrations.
-
-  The IDP Runtime Service API connector has the following operations:
-
   - **getDocumentActionExecution**Retrieves the result of a document action execution.
   - **postDocumentActionExecution**Submits a document to IDP for processing.
 
