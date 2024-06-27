@@ -4,12 +4,10 @@ version: v1
 mediaType: application/json
 protocols: HTTPS
 
-baseUri: https://{host}/api/{version}/idp/organizations/{orgId}
+baseUri: https://{host}/api/{version}/idp
 baseUriParameters:
   host:
     type: field-runtimeRegion
-  orgId:
-    type: field-orgId
 
 /actions/{actionId}/versions/{actionVersion}/executions:
   uriParameters:
