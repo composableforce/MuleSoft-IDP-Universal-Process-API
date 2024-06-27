@@ -11,20 +11,6 @@ baseUriParameters:
     example: mulesoft-idp-universal-process-app-uupas5.m3jzw3-1.deu-c1.cloudhub.io
     default: mulesoft-idp-universal-process-app-uupas5.m3jzw3-1.deu-c1.cloudhub.io
 
-traits:
-  client-id-required:
-    description: 🛡️ MuleSoft Client ID Enforcement
-    headers:
-      client_id:
-        type: string
-      client_secret:
-        type: string
-    responses:
-      401:
-        description: Unauthorized or invalid client application credentials
-      500:
-        description: Bad response from authorization server, or WSDL SOAP Fault error
-
 /idp/actions/{actionId}/versions/{actionVersion}/executions:
   uriParameters:
     actionId:
@@ -139,6 +125,20 @@ traits:
           body:
             application/problem+json:
               type: object-commonError
+
+traits:
+  client-id-required:
+    description: 🛡️ MuleSoft Client ID Enforcement
+    headers:
+      client_id:
+        type: string
+      client_secret:
+        type: string
+    responses:
+      401:
+        description: Unauthorized or invalid client application credentials
+      500:
+        description: Bad response from authorization server, or WSDL SOAP Fault error
 
 types:
 
@@ -321,8 +321,8 @@ description: |
   |||| 
   ||||
 
-  - **getDocumentActionExecution**Retrieves the result of a document action execution.
-  - **postDocumentActionExecution**Submits a document to IDP for processing.
+  - **getDocumentActionExecution** Retrieves the result of a document action execution.
+  - **postDocumentActionExecution** Submits a document to IDP for processing.
 
 documentation:
  - title: 📌 Why?
