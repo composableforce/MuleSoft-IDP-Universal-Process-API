@@ -1,0 +1,10 @@
+{
+  "main": "mulesoft-idp-universal-process-api.raml",
+  "name": "MuleSoft IDP Universal Process API",
+  "groupId": "eca25329-9592-4ff1-9054-1b08d103b991",
+  "assetId": "mulesoft-idp-universal-process-api",
+  "version": "1.0.0",
+  "classifier": "raml",
+  "tags": [],
+  "descriptorVersion": "1.0.0"
+}
