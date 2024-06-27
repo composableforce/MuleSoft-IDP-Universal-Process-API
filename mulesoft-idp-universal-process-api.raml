@@ -9,7 +9,13 @@ securedBy:
 
 
 /actions/{actionId}/versions/{actionVersion}/executions:
-
+  uriParameters:
+    actionId:
+      type: field-documentActionId
+      required: true
+    actionVersion:
+      type: field-documentActionVersion
+      required: true
 
 
 /{idpVersion}/organizations/{orgId}/actions/{documentActionId}/versions/{documentActionVersion}/executions:
