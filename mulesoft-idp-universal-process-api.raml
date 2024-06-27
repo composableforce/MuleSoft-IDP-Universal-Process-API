@@ -12,19 +12,17 @@ baseUriParameters:
     default: mulesoft-idp-universal-process-app-uupas5.m3jzw3-1.deu-c1.cloudhub.io
 
 traits:
-  - client-id-required:
-      headers:
-        client_id:
-          type: string
-        client_secret:
-          type: string
-      responses:
-        401:
-          description: Unauthorized or invalid client application credentials
-        500:
-          description: Bad response from authorization server, or WSDL SOAP Fault error
-
-
+  client-id-required:
+    headers:
+      client_id:
+        type: string
+      client_secret:
+        type: string
+    responses:
+      401:
+        description: Unauthorized or invalid client application credentials
+      500:
+        description: Bad response from authorization server, or WSDL SOAP Fault error
 
 /idp/actions/{actionId}/versions/{actionVersion}/executions:
   uriParameters:
