@@ -7,7 +7,9 @@ protocols: HTTPS
 baseUri: https://{host}/api/{version}
 baseUriParameters:
   host:
-    type: field-host
+    type: string
+    example: mulesoft-idp-universal-process-app-uupas5.m3jzw3-1.deu-c1.cloudhub.io
+    default: mulesoft-idp-universal-process-app-uupas5.m3jzw3-1.deu-c1.cloudhub.io
 
 /idp/actions/{actionId}/versions/{actionVersion}/executions:
   uriParameters:
@@ -161,11 +163,6 @@ securitySchemes:
 
 
 types:
-
-  field-host:
-    type: string
-    example: mulesoft-idp-universal-process-app-uupas5.m3jzw3-1.deu-c1.cloudhub.io
-    default: mulesoft-idp-universal-process-app-uupas5.m3jzw3-1.deu-c1.cloudhub.io
 
   field-actionId:
     displayName: IDP Document Action Id
