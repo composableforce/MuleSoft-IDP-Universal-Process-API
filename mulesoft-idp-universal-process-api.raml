@@ -46,7 +46,7 @@ baseUriParameters:
             default: IDP-PO-CD656092-BurlingtonTextiles.pdf
             example: IDP-PO-CD656092-BurlingtonTextiles.pdf
             type: string
-            
+            required: true
           fileType:
             description: File Name to be Processed https://docs.mulesoft.com/idp/quotas-and-limits
             enum:
@@ -55,6 +55,7 @@ baseUriParameters:
               - image/jpeg
             default: application/pdf
             type: string
+            required: true
           msc:
             type: field-msc
             required: false
@@ -64,6 +65,7 @@ baseUriParameters:
             description: fileContent has the actual payload.
             type: file
             fileTypes: ['application/pdf','image/png', 'image/jpeg']
+            required: true
 
     responses:
       201:
