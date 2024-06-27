@@ -1,2 +1,243 @@
 #%RAML 1.0
 title: MuleSoft IDP Universal Process API
+
+mediaType:
+  - application/json
+version: v1
+
+protocols:
+  - HTTPS
+
+securedBy:
+  -  SecurityScheme-header-apikey
+
+/{idpVersion}/organizations/{orgId}/actions/{documentActionId}/versions/{documentActionVersion}/executions:
+  uriParameters:
+    idpVersion:
+      type: field-version
+    orgId:
+      type: field-orgId
+    documentActionId:
+      type: field-documentActionId
+    documentActionVersion:
+      type: field-documentActionVersion
+
+  post:
+    displayName: IDP - postDocumentActionExecution
+    queryParameters:
+      mode:
+        enum:
+          - fireAndForget
+          - requestAndReply
+        default: requestAndReply
+        example: requestAndReply
+        type: string
+    body:
+      application/json:
+        properties:
+          contentBase64:
+            description: encode the file content in base64
+            example: JVBERi0xLjcNCiWhs8XXDQoxIDAgb......
+            type: string
+          fileName:
+            description: File Name to be Processed https://docs.mulesoft.com/idp/quotas-and-limits
+            default: IDP-PO-CD656092-BurlingtonTextiles.pdf
+            example: IDP-PO-CD656092-BurlingtonTextiles.pdf
+            type: string
+          fileType:
+            description: File Name to be Processed https://docs.mulesoft.com/idp/quotas-and-limits
+            enum:
+              - application/pdf
+              - image/png
+              - image/jpeg
+            default: application/pdf
+            type: string
+          msc?:
+            type: field-msc
+      multipart/form-data:
+        properties:
+          fileContent:
+            description: fileContent has the actual payload.
+            type: file
+            fileTypes: ['application/pdf','image/png', 'image/jpeg']
+    responses:
+      "202":
+        body:
+          application/json:
+            properties:
+              surrogateId:
+                type: field-surrogateId
+      "201":
+        body:
+          application/json: DocumentExecutionPostResponse
+
+                
+  /{executionId}:
+    uriParameters:
+      executionId:
+        type: field-executionId
+    get:
+      displayName: IDP - getDocumentActionExecution
+      responses:
+        "200":
+          description: Success
+          body:
+            application/json: DocumentExecutionGetResponse
+              
+types:
+  field-documentActionId:
+    type: field-guid
+    default: 90c3e286-72b5-42ca-92d0-22f86ea8d766
+    example: 90c3e286-72b5-42ca-92d0-22f86ea8d766
+  field-msc:
+    description: A field to carry origin keys for example
+    example: My Case Id
+    type: string
+  field-documentActionVersion:
+    type: string
+    description: Document Action Version like 1.0.0
+    default: 1.1.0
+    example: 1.1.0
+  field-orgId:
+    type: field-guid
+    description: MuleSoft Organisation GUID
+    default: eca25329-9592-4ff1-9054-1b08d103b991
+    example: eca25329-9592-4ff1-9054-1b08d103b991
+  field-version:
+    enum:
+      - v1
+    default: v1
+    example: v1
+    type: string
+  field-guid:
+    type: string
+    description: GUID
+    example: 4abdb3d5-90d0-47b8-b3b8-0f56f564187e
+  field-surrogateId:
+    example: 4abdb3d5-90d0-47b8-b3b8-0f56f564187e
+    type: string
+  field-documentName:
+    example: IDP-PO-CD656092-BurlingtonTextiles.pdf
+    type: string
+  field-executionId:
+    type: field-guid
+    default: 022c61de-9bfc-4a94-8a9c-43c5f8ac153e  
+    example: 022c61de-9bfc-4a94-8a9c-43c5f8ac153e
+
+  field-ExecutionStatus:
+    description: |
+      ## [Execution Results Reference](https://docs.mulesoft.com/idp/automate-document-processing-with-the-idp-api#execution-status-reference).
+
+      When you query the results of an execution, the IDP API returns any of the following statuses:
+
+      - `ACKNOWLEDGED`: The document action execution request was received.
+      - `IN_PROGRESS`: The execution started.
+      - `RESULTS_PENDING`: The execution finished and IDP is processing the results.
+      - `MANUAL_VALIDATION_REQUIRED`: The execution finished but the results need manual validation.
+      - `FAILED`: The execution request finished unsuccessfully.
+      - `PARTIAL_SUCCESS`: The execution request finished but some sub-tasks failed.
+      - `SUCCEEDED`: The execution request finished successfully.
+    default: IN_PROGRESS
+    enum:
+      - ACKNOWLEDGED
+      - IN_PROGRESS
+      - RESULTS_PENDING
+      - MANUAL_VALIDATION_REQUIRED
+      - FAILED
+      - PARTIAL_SUCCESS
+      - SUCCEEDED
+    example: IN_PROGRESS
+    type: string
+
+  DocumentExecutionPostResponse:
+    type: object
+    properties:
+      id:
+        type: field-executionId
+      documentName:
+        type: field-documentName
+      status?:
+        type: field-ExecutionStatus
+      surrogateId:
+        type: field-surrogateId
+
+
+
+  DocumentExecutionGetResponse:
+    type: object
+    properties:
+      pages?:
+        type: array
+        items: Page
+      id?:
+        type: field-executionId
+      documentName?:
+        type: string
+      prompts?:
+        type: Prompt
+      status?:
+        type: field-ExecutionStatus
+  Page:
+    type: object
+    properties:
+      tables?:
+        type: object
+        properties: {}
+      page?:
+        type: string
+      fields?:
+        type: object
+        properties: {}
+      prompts?:
+        type: Prompt
+  Prompt:
+    type: object
+    properties:
+      answer?: Field
+      source?:
+        type: string
+      prompt?:
+        type: string
+  Field:
+    type: object
+    properties:
+      value?:
+        type: string
+      geometry?:
+        type: object
+        properties:
+          height:
+            type: number
+            required: false
+          left:
+            type: number
+            required: false
+          width:
+            type: number
+            required: false
+          top:
+            type: number
+            required: false
+      confidenceScore?:
+        type: number
+
+securitySchemes:
+  SecurityScheme-header-apikey:
+    type: Pass Through
+    description: Client Id:Client Secret then base64 encoded
+    describedBy:
+      headers:
+        apikey:
+          description: Client Id:Client Secret then base64 encoded
+          default: MzY2MDhlM2NkYThkNGJhYWI0Y2QyZmQ5MmQ2MGNhNWM6ODYyMzYxQjI2OGZDNGI2MUI4ODIxOTc2NTUzYzljMDU=
+          example: MzY2MDhlM2NkYThkNGJhYWI0Y2QyZmQ5MmQ2MGNhNWM6ODYyMzYxQjI2OGZDNGI2MUI4ODIxOTc2NTUzYzljMDU=
+          type: string
+      responses:
+        "401":
+          body:
+            application/json:
+              properties:
+                error?:
+                  example: Invalid Client
+                  type: string
+
