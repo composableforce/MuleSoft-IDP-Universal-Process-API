@@ -7,7 +7,7 @@ protocols: HTTPS
 baseUri: https://{host}/api/{version}
 baseUriParameters:
   host:
-    type: field-runtimeRegion
+    type: field-host
 
 /idp/actions/{actionId}/versions/{actionVersion}/executions:
   uriParameters:
@@ -160,7 +160,7 @@ securitySchemes:
 
 types:
 
-  field-runtimeRegion:
+  field-host:
     displayName: IDP Runtime Region
     description: |
       Currently supported IDP Runtime Regions
