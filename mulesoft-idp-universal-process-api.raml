@@ -89,9 +89,9 @@ baseUriParameters:
           application/problem+json:
             type: object-commonError
 
-  /{execution-id}:
+  /{executionId}:
     uriParameters:
-      execution-id:
+      executionId:
         type: field-executionId
     get:
       is: [client-id-required]
