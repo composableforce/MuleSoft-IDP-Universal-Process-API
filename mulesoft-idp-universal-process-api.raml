@@ -49,8 +49,9 @@ baseUriParameters:
               - image/jpeg
             default: application/pdf
             type: string
-          msc?:
+          msc:
             type: field-msc
+            required: false
       multipart/form-data:
         properties:
           fileContent:
@@ -166,16 +167,7 @@ types:
     example: mulesoft-idp-universal-process-app-uupas5.m3jzw3-1.deu-c1.cloudhub.io
     default: mulesoft-idp-universal-process-app-uupas5.m3jzw3-1.deu-c1.cloudhub.io
 
-  field-runtimeServiceApiVersion:
-    displayName: IDP Runtime Service API Version
-    description: Current version of the MuleSoft IDP Runtime Service API Version
-    type: string
-    enum:
-      - v1
-    default: v1
-    maxLength: 2
-    minLength: 2
-    pattern: ^v[0-9]$
+
 
   field-orgId:
     displayName: MuleSoft Anypoint Organization Id
