@@ -7,8 +7,7 @@ protocols: HTTPS
 baseUri: https://{host}/api/{version}
 baseUriParameters:
   host:
-    type: string
-    
+    type: field-host
 
 /idp/actions/{actionId}/versions/{actionVersion}/executions:
   uriParameters:
@@ -160,6 +159,10 @@ securitySchemes:
 
 
 types:
+
+  field-host:
+    type: string
+    example: sadas
 
   field-runtimeServiceApiVersion:
     displayName: IDP Runtime Service API Version
