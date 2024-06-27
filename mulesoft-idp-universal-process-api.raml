@@ -107,6 +107,7 @@ traits:
       execution-id:
         type: field-executionId
     get:
+    is: [client-id-required]
       displayName: 🤖 IDP getDocumentActionExecution
       description: Retrieves the State & Result Data of a document action execution.
       queryParameters:
