@@ -4,12 +4,13 @@ version: v1
 mediaType: application/json
 protocols: HTTPS
 
-baseUri: https://idp-rt.{region}.anypoint.mulesoft.com/api/{version}/idp/organizations/{orgId}
+baseUri: https://{host}/api/{version}/idp/organizations/{orgId}
 baseUriParameters:
-  region:
+  host:
     type: field-runtimeRegion
   orgId:
-      type: field-orgId
+    type: field-orgId
+
 
 /actions/{actionId}/versions/{actionVersion}/executions:
   uriParameters:
