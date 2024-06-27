@@ -4,12 +4,12 @@ version: v1
 mediaType: application/json
 protocols: HTTPS
 
-baseUri: https://:host/api/:version
+baseUri: https://{host}/api/{version}
 baseUriParameters:
   host:
     type: field-host
 
-/idp/actions/:actionId/versions/:actionVersion/executions:
+/idp/actions/{actionId}/versions/{actionVersion}/executions:
   uriParameters:
     actionId:
       type: field-actionId
