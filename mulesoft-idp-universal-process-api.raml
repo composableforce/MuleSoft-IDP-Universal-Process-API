@@ -19,7 +19,14 @@ baseUriParameters:
   post:
     displayName: 🤖 IDP postDocumentActionExecution
     description: Submits a file for IDP processing
-
+    queryParameters:
+      mode:
+        enum:
+          - event
+          - requestAndReply
+        default: requestAndReply
+        example: requestAndReply
+        type: string
     body:
       multipart/form-data:
         type: any
