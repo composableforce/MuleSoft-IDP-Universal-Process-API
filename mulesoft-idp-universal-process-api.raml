@@ -23,7 +23,7 @@ baseUriParameters:
     description: Submits a file for IDP processing
     queryParameters:
       mode:
-        description: e
+        description: Mode
         displayName: Mode
         enum:
           - requestAndReply
@@ -40,11 +40,13 @@ baseUriParameters:
             description: encode the file content in base64
             example: JVBERi0xLjcNCiWhs8XXDQoxIDAgb......
             type: string
+            required: true
           fileName:
             description: File Name to be Processed https://docs.mulesoft.com/idp/quotas-and-limits
             default: IDP-PO-CD656092-BurlingtonTextiles.pdf
             example: IDP-PO-CD656092-BurlingtonTextiles.pdf
             type: string
+            
           fileType:
             description: File Name to be Processed https://docs.mulesoft.com/idp/quotas-and-limits
             enum:
