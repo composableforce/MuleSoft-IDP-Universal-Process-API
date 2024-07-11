@@ -19,6 +19,7 @@ baseUriParameters:
       type: field-actionVersion
 
   post:
+    is: [client-id-required]
     displayName: 🤖 IDP postDocumentActionExecution
     description: Submits a file for IDP processing
     queryParameters:
@@ -84,6 +85,7 @@ baseUriParameters:
       executionId:
         type: field-executionId
     get:
+      is: [client-id-required]
       displayName: 🤖 IDP getDocumentActionExecution
       description: Retrieves the State & Result Data of a document action execution.
       queryParameters:
