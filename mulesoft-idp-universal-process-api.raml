@@ -4,12 +4,13 @@ version: v1
 mediaType: application/json
 protocols: HTTPS
 
-baseUri: https://{host}/api/{version}
-baseUriParameters:
-  host:
-    type: string
-    example: mulesoft-idp-universal-process-app-uupas5.m3jzw3-1.deu-c1.cloudhub.io
-    default: mulesoft-idp-universal-process-app-uupas5.m3jzw3-1.deu-c1.cloudhub.io
+# Salesforce External Services can not handle at present 
+#baseUri: https://{host}/api/{version}
+#baseUriParameters:
+#  host:
+#    type: string
+#    example: mulesoft-idp-universal-process-app-uupas5.m3jzw3-1.deu-c1.cloudhub.io
+#    default: mulesoft-idp-universal-process-app-uupas5.m3jzw3-1.deu-c1.cloudhub.io
 
 /idp/actions/{actionId}/versions/{actionVersion}/executions:
   uriParameters:
